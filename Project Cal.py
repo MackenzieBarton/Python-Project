@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-
-# 
 from Tkinter import *
 class calculator:
     def __init__(self):
-        self.root = Tk()
+        self.root = Tkinter.Tk()
         self.display.grid(row=1, column=0, columnspan=5)
         self.equationEnd = False
 #These are the buttons for 0-9
@@ -32,14 +30,35 @@ class calculator:
         Button(self.root, text="Clear", width=7, command=lambda:self.clear("all")).grid(row=3, column=3)
         Button(self.root, text="Delete", width=7, command=lambda:self.clear("1")).grid(row=3, column=2)   
 
-
     def addingNumbers():
-    def doingEquation():
-    def Equals():
-    def clear():
-    def memory():
+        if self.equationEnd == True:
+            self.equationEnd = False
+            if number == "x" or  number == "÷" or  number == "+" or  number == "-":
+                y = self.display.get()
+                yAdd = y[1:]
+                self.display.delete(0, END)
+                self.display.insert(0, yAct)
+                self.display.insert(END, number)
+            else:
+                self.display.delete(0, END)
+                self.display.insert(0, number)
+        elif number == ".":
+            if self.dot == True:
+                pass
+            else:
+                self.dot = True
+                self.display.insert(END, number)
+        elif number == "x" or number == "-"or number == "+"or number == "÷":
+            self.dot = False
+            self.display.insert(END, number)
+        else:
+            self.display.insert(END, number) 
+  #def doingEquation()
+  #def Equals():
+  #def clear():
+  #def memory():
 
 
 
 
-mainloop()
+#Calculator()
