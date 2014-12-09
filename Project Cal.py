@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# 
 from Tkinter import *
 class calculator:
     def __init__(self):
@@ -33,7 +32,7 @@ class calculator:
         Button(self.root, text="Delete", width=7, command=lambda:self.clear("1")).grid(row=3, column=2)   
 
 
-    def addingNumbers():
+    def AddFunction():
     def doingEquation():
     def Equals():
     def clear():
