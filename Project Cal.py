@@ -27,12 +27,12 @@ class calculator:
         Button(self.root, text=".", width=5, command=lambda: self.addNumber(".")).grid(row=7, column=0)
         Button(self.root, text="=", width=12, command=lambda: self.Equals()).grid(row=8, column=2, columnspan=2)
 #These are the function buttons     
-        Button(self.root, text="(", width=7, foreground="red", command=lambda: self.addNumber("(")).grid(row=8, column=0)
-        Button(self.root, text=")", width=7, foreground="red", command=lambda: self.addNumber(")")).grid(row=8, column=1)
-        Button(self.root, text="X", width=7, foreground="red", command=lambda: self.addNumber("x")).grid(row=4, column=3)
-        Button(self.root, text="÷", width=7, foreground="red", command=lambda: self.addNumber("÷")).grid(row=5, column=3)
-        Button(self.root, text="-", width=7, foreground="red", command=lambda: self.addNumber("-")).grid(row=6, column=3)
-        Button(self.root, text="+", width=7, foreground="red", command=lambda: self.addNumber("+")).grid(row=7, column=3)
+        #Button(self.root, text="(", width=7, foreground="red", command=lambda: self.addNumber("(")).grid(row=8, column=0)
+        #Button(self.root, text=")", width=7, foreground="red", command=lambda: self.addNumber(")")).grid(row=8, column=1)
+        Button(self.root, text="X", width=7, foreground="red", command=lambda: self.doMath("*")).grid(row=4, column=3)
+        Button(self.root, text="÷", width=7, foreground="red", command=lambda: self.doMath("/")).grid(row=5, column=3)
+        Button(self.root, text="-", width=7, foreground="red", command=lambda: self.doMath("-")).grid(row=6, column=3)
+        Button(self.root, text="+", width=7, foreground="red", command=lambda: self.doMath("+")).grid(row=7, column=3)
         Button(self.root, text="Clear", width=7, command=lambda:self.clear("all")).grid(row=3, column=3)
         Button(self.root, text="Delete", width=7, command=lambda:self.clear("1")).grid(row=3, column=2)   
         self.display.insert(END, '0')
@@ -46,10 +46,30 @@ class calculator:
             return
         if char == '.':
             self.dot = True
-        self.display.insert(END, char) 
+        self.display.insert(END, char)
     
-  #def doingEquation()
-  #def Equals():
+    def doMath(self, oper):
+        temp = self.display.get()
+        self.value = float(temp)
+        self.operator = oper
+        self.clear("all") 
+
+    #def doingEquation()
+    def Equals(self):
+        temp = self.display.get()
+        self.value2 = float(temp)
+        if self.operator == '+':
+            self.value = self.value + self.value2
+        if self.operator == '-':
+            self.value = self.value - self.value2
+        if self.operator == '*':
+            self.value = self.value * self.value2
+        if self.operator == '/':
+            self.value = self.value / self.value2
+        self.display.delete(0, END)
+        self.display.insert(END, self.value)
+        
+        
     def clear(self, mode):
         if mode == 'all':
             self.display.delete(0, END)
