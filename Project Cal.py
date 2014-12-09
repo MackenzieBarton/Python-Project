@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 from Tkinter import *
 class calculator:
-    def __init__(self):
-        self.root = Tkinter.Tk()
+    def __init__(self,master):
+        self.root = Tk()
+        self.menu = Menu(self.root)
+        self.menu.add_command(label="Quit", command=self.root.destroy) 
+        self.root.config(menu=self.menu)
+        self.root.title("Calculator")
+        self.display = Entry(self.root)
         self.display.grid(row=1, column=0, columnspan=5)
+        self.dot = False
         self.equationEnd = False
 #These are the buttons for 0-9
 # 'Lambda' is a construction that allows python to use anonymous fuctions that are not bound to a name
@@ -29,36 +35,37 @@ class calculator:
         Button(self.root, text="+", width=7, foreground="red", command=lambda: self.addNumber("+")).grid(row=7, column=3)
         Button(self.root, text="Clear", width=7, command=lambda:self.clear("all")).grid(row=3, column=3)
         Button(self.root, text="Delete", width=7, command=lambda:self.clear("1")).grid(row=3, column=2)   
+        self.display.insert(END, '0')
 
-    def addingNumbers():
-        if self.equationEnd == True:
-            self.equationEnd = False
-            if number == "x" or  number == "÷" or  number == "+" or  number == "-":
-                y = self.display.get()
-                yAdd = y[1:]
-                self.display.delete(0, END)
-                self.display.insert(0, yAct)
-                self.display.insert(END, number)
-            else:
-                self.display.delete(0, END)
-                self.display.insert(0, number)
-        elif number == ".":
-            if self.dot == True:
-                pass
-            else:
-                self.dot = True
-                self.display.insert(END, number)
-        elif number == "x" or number == "-"or number == "+"or number == "÷":
-            self.dot = False
-            self.display.insert(END, number)
-        else:
-            self.display.insert(END, number) 
+    #def addingNumbers():
+    def addNumber(self, char):
+        temp = self.display.get()
+        if (temp == '0') and char != '.':
+            self.display.delete(0)
+        if self.dot == True and char == '.':
+            return
+        if char == '.':
+            self.dot = True
+        self.display.insert(END, char) 
+    
   #def doingEquation()
   #def Equals():
-  #def clear():
+    def clear(self, mode):
+        if mode == 'all':
+            self.display.delete(0, END)
+            self.display.insert(END, '0')
+            self.dot = False
+        else:
+            temp = self.display.get()
+            self.display.delete(0, END)
+            temp = temp[:-1]
+            self.display.insert(END, temp)
+  
   #def memory():
 
+root = Tk()
+Calculator = calculator(root)
+root.mainloop()
 
 
-
-#Calculator()
+#calculator()
