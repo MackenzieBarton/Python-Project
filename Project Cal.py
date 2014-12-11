@@ -50,7 +50,10 @@ class calculator:
     def invert(self):
         temp = -float(self.display.get())
         self.display.delete(0, END)
-        self.display.insert(END, temp)
+        if temp == int(temp):
+            self.display.insert(END, int(temp))
+        else:
+            self.display.insert(END, temp)
     def addNumber(self, char):
         if self.printed == True:
             temp = "0"
