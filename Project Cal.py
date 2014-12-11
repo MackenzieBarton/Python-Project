@@ -36,19 +36,28 @@ class calculator:
         Button(self.root, text="Clear", width=7, command=lambda:self.clear("all")).grid(row=3, column=3)
         Button(self.root, text="Delete", width=7, command=lambda:self.clear("1")).grid(row=3, column=2)   
         self.display.insert(END, '0')
-        self.operator = "+"
+        self.operator = "="
         self.value = 0
+        self.printed = True
 
     #def addingNumbers():
     def addNumber(self, char):
-        temp = self.display.get()
+        if self.printed == True:
+            temp = "0"
+        else:
+            temp = self.display.get()
+        self.printed = False
         if (temp == '0') and char != '.':
-            self.display.delete(0)
+            temp = ""
         if self.dot == True and char == '.':
-            return
+            self.display.delete(0, END)
+            self.display.insert(END, temp)
         if char == '.':
             self.dot = True
-        self.display.insert(END, char)
+        temp = temp + char
+        self.display.delete(0, END)
+        self.display.insert(END, temp)
+        
     
     def doMath(self, oper):
         temp = self.display.get()
@@ -61,24 +70,12 @@ class calculator:
             self.value = self.value * self.value2
         if self.operator == '/':
             self.value = self.value / self.value2
+        if self.operator == '=':
+            self.value = self.value2
         self.display.delete(0, END)
         self.display.insert(END, self.value)
         self.operator = oper
-
-    #def doingEquation()
-    def Equals(self):
-        temp = self.display.get()
-        self.value2 = float(temp)
-        if self.operator == '+':
-            self.value = self.value + self.value2
-        if self.operator == '-':
-            self.value = self.value - self.value2
-        if self.operator == '*':
-            self.value = self.value * self.value2
-        if self.operator == '/':
-            self.value = self.value / self.value2
-        self.display.delete(0, END)
-        self.display.insert(END, self.value)
+        self.printed = True
         
         
     def clear(self, mode):
@@ -86,6 +83,9 @@ class calculator:
             self.display.delete(0, END)
             self.display.insert(END, '0')
             self.dot = False
+            self.value = 0
+            self.printed = True
+            self.operator = '='
         else:
             temp = self.display.get()
             self.display.delete(0, END)
