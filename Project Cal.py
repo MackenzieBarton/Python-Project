@@ -25,7 +25,7 @@ class calculator:
         Button(self.root, text="0", width=7, foreground="blue", command=lambda: self.addNumber("0")).grid(row=7, column=1)
 #Buttons for decimal and equals
         Button(self.root, text=".", width=5, command=lambda: self.addNumber(".")).grid(row=7, column=0)
-        Button(self.root, text="=", width=12, command=lambda: self.Equals()).grid(row=8, column=2, columnspan=2)
+        Button(self.root, text="=", width=12, command=lambda: self.doMath("=")).grid(row=8, column=2, columnspan=2)
 #These are the function buttons     
         #Button(self.root, text="(", width=7, foreground="red", command=lambda: self.addNumber("(")).grid(row=8, column=0)
         #Button(self.root, text=")", width=7, foreground="red", command=lambda: self.addNumber(")")).grid(row=8, column=1)
@@ -36,6 +36,8 @@ class calculator:
         Button(self.root, text="Clear", width=7, command=lambda:self.clear("all")).grid(row=3, column=3)
         Button(self.root, text="Delete", width=7, command=lambda:self.clear("1")).grid(row=3, column=2)   
         self.display.insert(END, '0')
+        self.operator = "+"
+        self.value = 0
 
     #def addingNumbers():
     def addNumber(self, char):
@@ -50,9 +52,18 @@ class calculator:
     
     def doMath(self, oper):
         temp = self.display.get()
-        self.value = float(temp)
+        self.value2 = float(temp)
+        if self.operator == '+':
+            self.value = self.value + self.value2
+        if self.operator == '-':
+            self.value = self.value - self.value2
+        if self.operator == '*':
+            self.value = self.value * self.value2
+        if self.operator == '/':
+            self.value = self.value / self.value2
+        self.display.delete(0, END)
+        self.display.insert(END, self.value)
         self.operator = oper
-        self.clear("all") 
 
     #def doingEquation()
     def Equals(self):
