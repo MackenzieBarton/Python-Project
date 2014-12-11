@@ -75,7 +75,7 @@ class calculator:
     
     def doMath(self, oper):
         temp = self.display.get()
-<<<<<<< HEAD
+
         self.value = float(temp)
         self.operator = oper
         self.clear("all") 
@@ -89,8 +89,7 @@ class calculator:
     #def doingEquation()
     def Equals(self):
         temp = self.display.get()
-=======
->>>>>>> e1576e9e3b09da6eaa8e3b5d319f6a1b2e548343
+
         self.value2 = float(temp)
         if self.operator == '+':
             self.value = self.value + self.value2
