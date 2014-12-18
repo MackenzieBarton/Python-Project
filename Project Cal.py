@@ -80,13 +80,7 @@ class calculator:
         self.operator = oper
         self.clear("all") 
 
-    #def AddFunction():
-    #def doingEquation():
-    #def Equals():
-   # def clear():
-   # def memory():
 
-    #def doingEquation()
     def Equals(self):
         temp = self.display.get()
 
